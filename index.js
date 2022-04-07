@@ -1,7 +1,21 @@
 const express = require("express");
+const morgan = require("morgan");
 const app = express();
 
 app.use(express.json());
+
+// Morgan tiny config includes method, url, status, response content
+// length, and response time. Configuring morgan to log to console
+// based on the tiny config, but adding request body content
+app.use(morgan(":method :url :status :res[content-length] - :response-time ms :body"));
+
+// Create new token for request body content, converts the JSON
+// to a string, and returns it
+morgan.token("body", function (req, res) {
+    return [
+        JSON.stringify(req.body)
+    ];
+});
 
 let persons = [
     {
