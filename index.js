@@ -4,9 +4,18 @@ const app = express();
 
 app.use(express.json());
 
+// 3.7 Add morgan middleware to your application and configure it 
+// to log messages to your console BASED ON the tiny config.
+
+// app.use(morgan("tiny"));
+// OR
+// app.use(morgan(":method :url :status :res[content-length] - :response-time ms"));
+
 // Morgan tiny config includes method, url, status, response content
 // length, and response time. Configuring morgan to log to console
-// based on the tiny config, but adding request body content
+// BASED ON the tiny config
+
+// 3.8 Configure morgan so that it also shows the data sent in HTTP POST reqeuests
 app.use(morgan(":method :url :status :res[content-length] - :response-time ms :body"));
 
 // Create new token for request body content, converts the JSON
